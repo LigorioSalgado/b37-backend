@@ -1,3 +1,45 @@
 type Query{
     prueba:String
 }
+
+type Event{
+    _id:ID!
+    title:String!
+    description:String!
+    date:String
+    address:Address
+    assistants:[User]
+    created_by:User!
+    banner:String
+    tags:[String]
+    is_active:Boolean!
+
+}
+
+type Address {
+    street:String!
+    number:String
+    city:String
+    state:String
+    country:String
+    zip:String
+}
+
+type User{
+    _id:ID!
+    first_name:String!
+    last_name:String!
+    birth_date:String
+    email:String!
+    gender:GENDER #Esto es un commet
+    events_created:[Event]
+    events_assist:[Event]
+    photo:String
+    is_active:Boolean
+}
+
+
+
+
+
+

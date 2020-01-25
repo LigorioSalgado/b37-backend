@@ -2,7 +2,7 @@ const { createUser } =  require('../../services/UserService');
 
 const newUser = (root,args,context,info) => {
     
-	return createUser(args);
+	return createUser(args.data);
 
 };
 

@@ -12,8 +12,7 @@ const getUserByID =  (_id) => {
 	return User.findOne({_id}).exec();
 };
 const createUser = (data) => {
-	return User.create(data).exec();
-
+	return User.create(data);
 };
 
 const updateUserByID = (id, data) =>{

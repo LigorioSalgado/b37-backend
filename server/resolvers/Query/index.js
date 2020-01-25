@@ -1,4 +1,4 @@
-const UserQuery = './UserQuery.js';
+const UserQuery = require('./UserQuery');
 
 module.exports = {
 	...UserQuery

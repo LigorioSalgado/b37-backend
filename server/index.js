@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server');
 const { importSchema } = require('graphql-import');
-
-const resolvers = {
-	Query: {
-		prueba: () => 'Hola Mundo!!!'
-	}
-};
+const resolvers =  require('./resolvers');
 
 const typeDefs = importSchema(__dirname + '/schema.graphql');
 

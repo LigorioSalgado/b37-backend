@@ -5,6 +5,13 @@ type Query {
 
 type Mutation {
     newUser(data:UserAdd!):User
+    updateUser(data:UserUpdate!,id:ID!):User
+    deleteUser(id:ID!):Message
+}
+
+type Message {
+    code:Int
+    message:String
 }
 
 input UserAdd {
@@ -17,6 +24,18 @@ input UserAdd {
     photo:String
 
 }
+
+input UserUpdate {
+    first_name:String
+    last_name:String
+    email:String
+    password:String
+    birth_date:String
+    gender:GENDER
+    photo:String
+    is_active: Boolean
+}
+
 type User{
     _id:ID!
     first_name:String!

@@ -5,8 +5,14 @@ type Query {
 
 type Mutation {
     newUser(data:UserAdd!):User
+    login(password:String!,email:String!):Auth
     updateUser(data:UserUpdate!,id:ID!):User
-    deleteUser(id:ID!):Message
+    deleteUser(id:ID!):Message @auth
+}
+
+type Auth{
+    token:String!
+    message:String!
 }
 
 type Message {
@@ -18,7 +24,7 @@ input UserAdd {
     first_name:String!
     last_name:String!
     email:String!
-    password:String
+    password:String!
     birth_date:String
     gender:GENDER
     photo:String
@@ -42,6 +48,7 @@ type User{
     last_name:String!
     birth_date:String
     email:String!
+    password:String
     gender:GENDER #Esto es un commet
     events_created:[Event]
     events_assist:[Event]

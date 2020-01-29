@@ -1,9 +1,18 @@
 const { createUser, updateUserByID, getUserByID, deleteUserByID } =  require('../../services/UserService');
+const authenticate = require('../../utils/authenticate');
 
 const newUser = (root,args,context,info) => {
     
 	return createUser(args.data);
 
+};
+
+const login = async(root,args) => {
+	const token = await authenticate(args);
+	return {
+		token,
+		message: 'Token created Successfully'
+	};
 };
 
 const updateUser = async(_,args) => {
@@ -26,5 +35,5 @@ module.exports = {
 	newUser,
 	updateUser,
 	deleteUser,
-
+	login
 };

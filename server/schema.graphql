@@ -3,13 +3,57 @@ directive @auth on FIELD_DEFINITION | FIELD
 type Query   {
     allUsers(is_active:Boolean):[User]
     getOneUser(id:ID,email:String):User
+    allEvents:[Event]
+    getEvent(id:ID):[Event]
 }
 
 type Mutation {
-    newUser(data:UserAdd! ):User
+    newUser(data:UserAdd!):User
     login(password:String!,email:String!):Auth
     updateUser(data:UserUpdate!,id:ID!):User @auth
+    createNewEvent(data:EventAdd!):Event
     deleteUser(id:ID!):Message @auth
+    createEvent(data:EventAdd!):Event @auth
+    updateEvent(data:EventEdit!):Event @auth
+    deleteEvent(id:ID):Message @auth
+    joinEvent(id:ID):Message @auth
+    leaveEvent(id:ID):Message @auth
+}
+
+input EventAdd{
+    title:String!
+    description:String!
+    date:String
+    address:AddressAdd
+    banner:String
+    tags:[String]
+}
+
+input AddressAdd {
+    street:String
+    number:String
+    city:String
+    state:String
+    country:String
+    zip:String
+}
+
+input EventEdit{
+    title:String
+    description:String
+    date:String
+    address:AddressEdit
+    banner:String
+    tags:[String]
+}
+
+input AddressEdit {
+    street:String
+    number:String
+    city:String
+    state:String
+    country:String
+    zip:String
 }
 
 type Auth {

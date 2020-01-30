@@ -1,16 +1,18 @@
-type Query {
+directive @auth on FIELD_DEFINITION | FIELD
+
+type Query   {
     allUsers(is_active:Boolean):[User]
     getOneUser(id:ID,email:String):User
 }
 
 type Mutation {
-    newUser(data:UserAdd!):User
+    newUser(data:UserAdd! ):User
     login(password:String!,email:String!):Auth
-    updateUser(data:UserUpdate!,id:ID!):User
+    updateUser(data:UserUpdate!,id:ID!):User @auth
     deleteUser(id:ID!):Message @auth
 }
 
-type Auth{
+type Auth {
     token:String!
     message:String!
 }

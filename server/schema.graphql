@@ -1,3 +1,4 @@
+scalar Upload
 directive @auth on FIELD_DEFINITION | FIELD
 
 type Query   {
@@ -25,7 +26,7 @@ input EventAdd{
     description:String!
     date:String
     address:AddressAdd
-    banner:String
+    banner:Upload #Nuevo scalar
     tags:[String]
 }
 
@@ -73,7 +74,7 @@ input UserAdd {
     password:String!
     birth_date:String
     gender:GENDER
-    photo:String
+    photo:Upload
 
 }
 
@@ -84,7 +85,7 @@ input UserUpdate {
     password:String
     birth_date:String
     gender:GENDER
-    photo:String
+    photo:Upload
     is_active: Boolean
 }
 

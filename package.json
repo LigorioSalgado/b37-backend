@@ -5,16 +5,20 @@
   "main": "server/index.js",
   "scripts": {
     "dev": "nodemon server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Edwin Salgado",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.9.16",
+    "apollo-server-testing": "^2.9.16",
     "bcrypt": "^3.0.7",
     "graphql": "^14.5.8",
     "graphql-import": "^0.7.1",
     "graphql-scalars": "^1.0.6",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.6",
+    "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.9"
   },

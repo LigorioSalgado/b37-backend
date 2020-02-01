@@ -4,7 +4,7 @@ const { importSchema } = require('graphql-import');
 const resolvers =  require('./resolvers');
 const verifyToken = require('./utils/verifyToken');
 const AuthDirective = require('./resolvers/Directives/AuthDirective');
-
+const { makeExecutableSchema } = require('graphql-tools');
 const typeDefs = importSchema(__dirname + '/schema.graphql');
 
 // const schema = {
@@ -26,15 +26,21 @@ mongo
 	.on('error', error => console.log(error))
 	.once('open', () => console.log('Connected to database'));
 
-const server = new ApolloServer({ 
+const schema =  makeExecutableSchema({
 	typeDefs, 
 	resolvers,
 	schemaDirectives:{
 		auth:AuthDirective
-	},
+	}
+});
+
+const server = new ApolloServer({ 
+	schema,
 	context: ({req}) =>  verifyToken(req)
 });
 
 server.listen().then(({ url }) => {
 	console.log(`Server starts in : ${url}`);
 });
+
+module.exports = { schema };

@@ -7,10 +7,47 @@ Object {
       "_id": "5e2bb4004809b000d6141c73",
       "first_name": "Edwin",
       "last_name": "Salgado",
-      "password": null,
     },
   },
   "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Create User 2`] = `
+Object {
+  "data": Object {
+    "newUser": Object {
+      "_id": "5e2bb4004809b000d6141c73",
+      "first_name": "Edwin",
+      "last_name": "Salgado",
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Get Users 1`] = `
+Object {
+  "data": Object {
+    "allUsers": Array [
+      null,
+    ],
+  },
+  "errors": Array [
+    [GraphQLError: Cannot return null for non-nullable field User._id.],
+  ],
   "extensions": undefined,
   "http": Object {
     "headers": Headers {

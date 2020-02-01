@@ -13,7 +13,19 @@ mutation createUser($Userdata:UserAdd!){
     _id
     first_name
     last_name
-    password
+  }
+}
+
+`;
+
+const GET_USERS = gql`
+query getUsers{
+  allUsers{
+    _id
+    email
+    first_name
+    last_name
+    
   }
 }
 
@@ -39,6 +51,7 @@ test('Create User', async() => {
 	expect(res.data.newUser).toHaveProperty('_id');
 });
 
+
 test('Not Create User', async() => {
 	const server = new ApolloServer({
 		schema
@@ -55,3 +68,36 @@ test('Not Create User', async() => {
 
 	expect(res).toHaveProperty('errors');
 });
+
+test('Create User', async() => {
+	const server = new ApolloServer({
+		schema
+	});
+	const { mutate } = createTestClient(server);
+
+	const res =  await mutate({
+		mutation: CREATE_USER,
+		variables: { Userdata:{
+			email:'prueba@prueba.com',
+			first_name:'prueba',
+			last_name: 'prueba',
+			password:'prueba'
+		}}
+	});
+
+	expect(res).toMatchSnapshot();
+	expect(res.data.newUser).toHaveProperty('_id');
+});
+
+test('Get Users', async() => {
+	const server = new ApolloServer({
+		schema
+	});
+	const { query } = createTestClient(server);
+
+	const res =  await query({
+		mutation: GET_USERS,});
+
+	expect(res).toMatchSnapshot();
+});
+

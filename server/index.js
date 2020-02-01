@@ -34,6 +34,7 @@ const schema =  makeExecutableSchema({
 	}
 });
 
+
 const server = new ApolloServer({ 
 	schema,
 	context: ({req}) =>  verifyToken(req)

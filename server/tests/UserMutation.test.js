@@ -69,26 +69,6 @@ test('Not Create User', async() => {
 	expect(res).toHaveProperty('errors');
 });
 
-test('Create User', async() => {
-	const server = new ApolloServer({
-		schema
-	});
-	const { mutate } = createTestClient(server);
-
-	const res =  await mutate({
-		mutation: CREATE_USER,
-		variables: { Userdata:{
-			email:'prueba@prueba.com',
-			first_name:'prueba',
-			last_name: 'prueba',
-			password:'prueba'
-		}}
-	});
-
-	expect(res).toMatchSnapshot();
-	expect(res.data.newUser).toHaveProperty('_id');
-});
-
 test('Get Users', async() => {
 	const server = new ApolloServer({
 		schema

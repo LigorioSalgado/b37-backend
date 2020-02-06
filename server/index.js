@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const { ApolloServer } = require('apollo-server');
 const { importSchema } = require('graphql-import');
@@ -13,8 +14,7 @@ const typeDefs = importSchema(__dirname + '/schema.graphql');
 //     typeDefs
 // }
 
-const MONGO_URI =
-  'mongodb+srv://prueba3:prueba3@cluster0-vp6hz.mongodb.net/meetup?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI, {
 	useNewUrlParser: true,
@@ -32,13 +32,19 @@ const schema =  makeExecutableSchema({
 	resolvers,
 	schemaDirectives:{
 		auth:AuthDirective
-	}
+	},
 });
 
 const server = new ApolloServer({ 
 	schema,
+	cors:{
+		origin:process.env.WHITHELIST.split(',')
+	},
 	context: ({req}) =>  verifyToken(req)
 });
+
+const port = process.env.PORT || 4000;
+
 
 server.listen().then(({ url }) => {
 	console.log(`Server starts in : ${url}`);

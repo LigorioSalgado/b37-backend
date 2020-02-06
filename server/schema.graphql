@@ -1,3 +1,143 @@
-type Query{
-    prueba:String
+scalar Upload
+directive @auth on FIELD_DEFINITION | FIELD
+
+type Query   {
+    allUsers(is_active:Boolean):[User]
+    getOneUser(id:ID,email:String):User
+    allEvents:[Event]
+    getEvent(id:ID):[Event]
 }
+
+type Mutation {
+    newUser(data:UserAdd!):User
+    login(password:String!,email:String!):Auth
+    updateUser(data:UserUpdate!,id:ID!):User @auth
+    createNewEvent(data:EventAdd!):Event
+    deleteUser(id:ID!):Message @auth
+    createEvent(data:EventAdd!):Event @auth
+    updateEvent(data:EventEdit!):Event @auth
+    deleteEvent(id:ID):Message @auth
+    joinEvent(id:ID):Message @auth
+    leaveEvent(id:ID):Message @auth
+}
+
+input EventAdd{
+    title:String!
+    description:String!
+    date:String
+    address:AddressAdd
+    banner:Upload #Nuevo scalar
+    tags:[String]
+}
+
+input AddressAdd {
+    street:String
+    number:String
+    city:String
+    state:String
+    country:String
+    zip:String
+}
+
+input EventEdit{
+    title:String
+    description:String
+    date:String
+    address:AddressEdit
+    banner:String
+    tags:[String]
+}
+
+input AddressEdit {
+    street:String
+    number:String
+    city:String
+    state:String
+    country:String
+    zip:String
+}
+
+type Auth {
+    token:String!
+    message:String!
+}
+
+type Message {
+    code:Int
+    message:String
+}
+
+input UserAdd {
+    first_name:String!
+    last_name:String!
+    email:String!
+    password:String!
+    birth_date:String
+    gender:GENDER
+    photo:Upload
+
+}
+
+input UserUpdate {
+    first_name:String
+    last_name:String
+    email:String
+    password:String
+    birth_date:String
+    gender:GENDER
+    photo:Upload
+    is_active: Boolean
+}
+
+type User{
+    _id:ID!
+    first_name:String!
+    last_name:String!
+    birth_date:String
+    email:String!
+    password:String
+    gender:GENDER #Esto es un commet
+    events_created:[Event]
+    events_assist:[Event]
+    photo:String
+    is_active:Boolean
+}
+
+type Event{
+    _id:ID!
+    title:String!
+    description:String!
+    date:String
+    address:Address
+    assistants:[User]
+    created_by:User!
+    banner:String
+    tags:[String]
+    is_active:Boolean!
+
+}
+
+type Address {
+    street:String!
+    number:String
+    city:String
+    state:String
+    country:String
+    zip:String
+}
+
+
+
+enum GENDER {
+    M
+    F
+    O
+}
+
+
+
+
+
+
+
+

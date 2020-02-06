@@ -4,15 +4,20 @@
   "description": "Es un clone de meetup",
   "main": "server/index.js",
   "scripts": {
-    "dev":"nodemon server/index.js",
+    "dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Edwin Salgado",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.9.16",
+    "bcrypt": "^3.0.7",
+    "cloudinary": "^1.19.0",
     "graphql": "^14.5.8",
     "graphql-import": "^0.7.1",
+    "graphql-scalars": "^1.0.6",
+    "graphql-tools": "^4.0.6",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.9"
   },
   "devDependencies": {

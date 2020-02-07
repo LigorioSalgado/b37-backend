@@ -9,7 +9,7 @@ const getEvents = () => {
 };
 
 const getEventByID = (_id) => {
-	return Event.findOne({_id}).exec();
+	return Event.findOne({_id}).populate('created_by').exec();
 };
 
 const updateEvent = (_id,data) => {

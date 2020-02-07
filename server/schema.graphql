@@ -5,7 +5,7 @@ type Query   {
     allUsers(is_active:Boolean):[User]
     getOneUser(id:ID,email:String):User
     allEvents:[Event]
-    getEvent(id:ID):[Event]
+    getEvent(id:ID):Event
 }
 
 type Mutation {

@@ -1,4 +1,5 @@
 scalar Upload
+scalar Date
 directive @auth on FIELD_DEFINITION | FIELD
 
 type Query   {
@@ -11,9 +12,8 @@ type Query   {
 type Mutation {
     newUser(data:UserAdd!):User
     login(password:String!,email:String!):Auth
-    updateUser(data:UserUpdate!,id:ID!):User @auth
-    createNewEvent(data:EventAdd!):Event
-    deleteUser(id:ID!):Message @auth
+    updateUser(data:UserUpdate!,id:ID!):User @auth    
+	deleteUser(id:ID!):Message @auth
     createEvent(data:EventAdd!):Event @auth
     updateEvent(data:EventEdit!):Event @auth
     deleteEvent(id:ID):Message @auth
@@ -24,7 +24,7 @@ type Mutation {
 input EventAdd{
     title:String!
     description:String!
-    date:String
+    date:Date
     address:AddressAdd
     banner:Upload #Nuevo scalar
     tags:[String]
@@ -107,7 +107,7 @@ type Event{
     _id:ID!
     title:String!
     description:String!
-    date:String
+    date:Date
     address:Address
     assistants:[User]
     created_by:User!

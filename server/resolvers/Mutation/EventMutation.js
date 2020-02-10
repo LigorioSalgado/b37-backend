@@ -1,8 +1,16 @@
 const EventServices = require('../../services/EventService');
 const UserServices = require('../../services/UserService');
+const storage = require('../../utils/storage');
+
 
 
 const createEvent = async(root,args,context) => {
+	if(args.data.banner){
+		const { createReadStream }  = await args.data.banner;
+		const stream = createReadStream();
+		const image = await storage({ stream });
+		args.data = {...args.data,banner:image.url};
+	}
 	args.data.created_by = context.user._id;
 	const event = await EventServices.createEvent(args.data);
 	await UserServices.addCreatedEvent(context.user._id, event._id);
